@@ -82,7 +82,7 @@ try {
             $session | Remove-PSSession
         }
     }
-
+# need to clean up the print statments and find return vaule
     $notResponding = $results | Where-Object State -ne "Responding"
     if ($null -ne $notResponding) {
         Write-Warning "The folling devices are not responding in Milestone"
