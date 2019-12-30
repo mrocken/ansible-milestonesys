@@ -7,7 +7,7 @@
     - name:
       win_copy: 
       src: "/files/camcheck.ps1" 
-      dest: C:\Temp\test_output2.ps1 
+      dest: C:\Temp\camcheck.ps1 
    
     - name: Run remote PowerShell Script
       win_command: powershell.exe -ExecutionPolicy ByPass -File C:/temp/camcheck.ps1
