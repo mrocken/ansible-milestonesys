@@ -18,7 +18,7 @@
         host: 127.0.0.1
         port: 2025
         subject: 
-        body: "{{ lookup('template', 'templates/update-success.j2') }}"
+        body: Cameras are offline
         from: 
         to:
         - "{{ hostvars[site-email-1]"
