@@ -1,0 +1,17 @@
+---
+- name: install CS
+  gather_facts: false
+  hosts: all
+  
+- tasks:
+    - name: Download CS
+      win_copy:
+        src: CS.msi
+        dest: C:\
+
+  task:
+    - name: Install CS
+      win_command:
+        free_form: WindowsSensor.exe /install /quiet CID="{{ customer_id }}" 
+        chdir: C:\
+

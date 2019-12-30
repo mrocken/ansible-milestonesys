@@ -1,0 +1,11 @@
+---
+- name: mstone-SQLBK
+  hosts: MGT
+  gather_facts: false
+
+  tasks:
+   - name: copy sql back up
+     win_copy:
+     src: C:\path\to\backup
+     dest: \path\to\dest
+     backup: yes

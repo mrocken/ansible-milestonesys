@@ -1,0 +1,14 @@
+---
+- name: pingtest
+  hosts: all
+  gather_facts: false
+  max_fail_percentage: 0
+
+  tasks:
+    - name: ping to see if server is reachable
+      win_ping:
+
+
+
+
+      

@@ -1,0 +1,17 @@
+---
+- hosts: MGT
+  gather_facts: false 
+
+  tasks:
+    - name: send mail  
+      mail:
+        host: 127.0.0.1
+        port: 2025
+        subject: 
+        body: "{{ lookup('template', 'templates/update-success.j2') }}"
+        from: mrockentine@vsecservices.com
+        to:
+        - "{{ hostvars[site-email-1]"
+        - "{{ hostvars[site-email-2]"
+        cc: support@vsecservices.com (Support)
+      delegate_to: localhost

@@ -1,0 +1,25 @@
+---
+# tasks file for win-update-role
+
+
+- include_tasks: ADU-Report.yml
+  when: inventory_hostname in groups['ADU'] #inventory_hostname == ADU
+
+- include_tasks: omreport.yml
+  when: inventory_hostname in groups['IDRAC']
+
+- include_tasks: mstone-SQLBK.yml
+  
+- include_tasks: win-update-task.yml
+
+- include_tasks: Mstone-servicecheck.yml
+
+- name: sleep for 605 seconds and continue with play
+  wait_for:
+    timeout: 605
+
+- include_tasks: cam-check.yml
+  when: inventory_hostname == MGT
+
+
+

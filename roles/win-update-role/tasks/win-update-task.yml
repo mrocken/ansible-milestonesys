@@ -1,0 +1,49 @@
+---
+- name:  Windows Update
+  hosts: all
+  gather_facts: false
+  vars:
+    win_update_categories:
+         - SecurityUpdates
+         - CriticalUpdates
+         - UpdateRollups
+         - Updates
+         - DefinitionUpdates
+         - Driver
+         - Servicepack
+         - Tool
+         - ServicingStackUpdates
+  tasks:   
+#install block and Milestone recording server stop
+   - block:
+        - name: Checking for Available Windows Updates
+          win_updates:
+           category_names: "{{ win_update_categories }}"
+           state: searched
+          register: available_updates
+
+        - name: Install Available Updates
+          win_updates:
+           category_names: "{{ win_update_categories }}"
+          register: installed_updates
+    
+        - name: stop milestone recording server
+          win_service:
+           name: Milestone XProtect Recording Server
+           state: stopped
+           when:  installed_updates.reboot_required
+
+        - name: Reboot, only if required.
+          win_reboot:
+            when: installed_updates.reboot_required
+            register: reboot_status
+          when: (available_updates.found_update_count|int >= 1)
+          notify: send mail 
+#      rescue:
+#        - office_365_connector_card:
+#            webhook: https://outlook.office.com/webhook/GUID/IncomingWebhook/GUID/GUID
+#            text: '"{{hostname}}" update has failed'
+
+
+
+

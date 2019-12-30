@@ -1,0 +1,31 @@
+---
+- name: cam-check
+
+  hosts: MGT
+  tasks:
+     
+    - name:
+      win_copy: 
+      src: "/files/camcheck.ps1" 
+      dest: C:\Temp\test_output2.ps1 
+   
+    - name: Run remote PowerShell Script
+      win_command: powershell.exe -ExecutionPolicy ByPass -File C:/temp/camcheck.ps1
+      register: {{ result.stdout | from_json }}
+
+    - name: send mail  
+      mail:
+        host: 127.0.0.1
+        port: 2025
+        subject: 
+        body: "{{ lookup('template', 'templates/update-success.j2') }}"
+        from: mrockentine@vsecservices.com
+        to:
+        - "{{ hostvars[site-email-1]"
+        - "{{ hostvars[site-email-2]"
+        cc: support@vsecservices.com (Support)
+      delegate_to: localhost
+      when: return vaule =< 6 
+
+   
+  
