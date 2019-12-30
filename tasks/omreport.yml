@@ -1,0 +1,25 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks: 
+    - name: pull storage report
+      win_command: powershell.exe omreport storage pdisk controller=0|select-string "^ID |Status|State|Failure"
+      when: "'idrac' in {{ group_names }}"
+      register: stdout
+
+    - name: Bad drives detected
+      office_365_connector_card:
+        webhook: https://outlook.office.com/webhook/GUID/IncomingWebhook/GUID/GUID
+        text: Bad drives at "{{invenory_hostname}}"
+        summary: 
+        when:
+          state.stdout !='ok'
+          failure.stdout != 'no'
+
+
+
+
+
+
+

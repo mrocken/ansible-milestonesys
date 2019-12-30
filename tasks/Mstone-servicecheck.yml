@@ -1,0 +1,24 @@
+---
+- hosts: milestone
+  gather_facts: false
+
+  tasks:
+    - name:
+        win_service:
+        name: Milestone Mobile Server
+        start_mode: delayed
+        state: started
+
+      win_service:
+        name: "{{ item }}"
+        start_mode: automatic
+        state: started
+      with_items:
+         - "Milestone XProtect Recording Server"
+         - "Milestone XProtect Management Server"
+         - "Milestone XProtect Log Server"
+         - "XProtect Data Collector Server"
+         - "Milestone XProtect Failover Server"
+         - "Milestone EventServer Service"
+
+

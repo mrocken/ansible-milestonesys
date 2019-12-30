@@ -1,0 +1,17 @@
+---
+- hosts: all
+  name: pull adu report
+  tasks:
+    
+ 
+    - name: get host name
+      win_command: hostname
+      register: output
+    - debug:
+        var: output
+    - debug: msg="{{ output.stdout_lines[0] }}-{{ lookup('pipe', 'date +%Y-%m-%d') }}-adureport.zip"
+ 
+ 
+    - name: run report 
+      win_command: hpacucli ctrl all diag file=/tmp/{{ stdout_lines }}
+#SUbeNESTC:\Program Files\Smart Storage Administrator\ssacli\bin\ssacli.exe
