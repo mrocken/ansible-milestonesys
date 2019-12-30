@@ -1,3 +1,6 @@
+#This is a modified script from Josh Hendricks 
+#https://developer.milestonesys.com/s/article/How-To-Use-MilestonePSTools-PowerShell-Module
+#untested
 function GetParentItemPath {
     param([string]$path)
 
