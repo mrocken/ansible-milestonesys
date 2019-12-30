@@ -12,7 +12,7 @@
     - name: Run remote PowerShell Script
       win_command: powershell.exe -ExecutionPolicy ByPass -File C:/temp/camcheck.ps1
       register: {{ result.stdout | from_json }}
-
+#untested, need the return vaules from the ps1 output
     - name: send mail  
       mail:
         host: 127.0.0.1
