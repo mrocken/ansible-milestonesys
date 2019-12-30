@@ -13,5 +13,5 @@
         to:
         - "{{ hostvars[site-email-1]"
         - "{{ hostvars[site-email-2]"
-        cc: support@vsecservices.com (Support)
+        cc: 
       delegate_to: localhost
