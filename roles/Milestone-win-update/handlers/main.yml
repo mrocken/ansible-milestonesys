@@ -11,7 +11,7 @@
         body: "{{ lookup('template', 'templates/update-success.j2') }}"
         from: 
         to:
-        - "{{ hostvars[site-email-1]"
-        - "{{ hostvars[site-email-2]"
+        - "{{ hostvars[site-email-1] }}"
+        - "{{ hostvars[site-email-2] }}"
         cc: 
       delegate_to: localhost
